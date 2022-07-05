@@ -1,22 +1,31 @@
 import "../SignIn/SignIn.style.scss";
 import FormInput from "../FormInput/FormInput";
+import CustomButton from "../CustomButton/CustomButton";
 import { useState } from "react";
+import { signInWithGoogle } from "../../FireBase/firebase.utils";
 
 const SignIn = () => {
 	const [attribute, setAttribute] = useState({
 		email: "",
-		password: "",
+		password: ""
 	});
-
+	// console.log(attribute);
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setAttribute({ email: "", password: "" });
+		setAttribute(() => {
+			return {email: "", password:"" };
+		});
+		// setAttribute((prev)=>return{{...prev,email:"", password:""}});
+		console.log("Submit");
+		console.log(attribute);
+
 	};
 
 	const handleChange = (event) => {
 		const { value, name } = event.target;
-        // console.log(event.target.value);
-		setAttribute({ [name]: value });
+		setAttribute((prev) => {
+			return { ...prev, [name]: value };
+		});
 	};
 
 	return (
@@ -41,6 +50,10 @@ const SignIn = () => {
 					label="password"
 					required
 				/>
+				<CustomButton type="submit">Sign In</CustomButton>
+				<br></br>
+				<CustomButton onClick={signInWithGoogle}>Sign In with Google</CustomButton>
+
 			</form>
 		</div>
 	);

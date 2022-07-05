@@ -8,7 +8,7 @@ const CategoryMenu = () => {
 			title: "hats",
 			imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
 			id: 1,
-			linkUrl: "hats"
+			linkUrl: "Hats"
 		},
 		{
 			title: "jackets",

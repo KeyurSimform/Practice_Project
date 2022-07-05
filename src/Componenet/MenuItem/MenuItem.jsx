@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const MenuItem = (props) => {
 	// const history = useHistory();
 	const navigate = useNavigate();
-	console.log(props);
+	// console.log(props);
 	return (
 		<div
 			className={`${props.size} menu-item`}
