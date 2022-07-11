@@ -5,8 +5,23 @@ import Shop from "./Pages/ShopPage/Shop";
 import Header from "./Componenet/Header/Header";
 import SignInAndSignUp from "./Pages/SignInAndSignOut/SignInAndSignUp"
 import HatsPage from "./Pages/HatsPage/HatsPage";
+import { auth } from "./FireBase/firebase.utils";
+import { useEffect,useState } from "react";
 
 function App() {	
+
+	const [users, setUsers] = useState(
+		{
+			currentUser : null,
+		}
+	);
+
+	useEffect(() => {
+		auth.onAuthStateChanged(users=>{
+		setUsers({currentUser : users});
+		console.log(users);
+	  })
+	}, [])
 	return (
 		<div>
 		<Header/>

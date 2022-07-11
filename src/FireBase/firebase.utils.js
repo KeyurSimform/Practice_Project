@@ -1,9 +1,9 @@
-import { initializeApp } from "firebase/app";
-// import 'firebase/firestore';
-// import 'firebase/auth';
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { GoogleAuthProvider } from "firebase/auth";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
+// import {SignInWi}
+
 const config = {
 	apiKey: "AIzaSyBJCrqFcXdmI4kwlDhwFTp7pHHZ5kYPIKM",
 	authDomain: "react-practice-project-cd871.firebaseapp.com",
@@ -14,13 +14,13 @@ const config = {
 	measurementId: "G-XDKSSYS6KB",
 };
 
-initializeApp(config);
+firebase.initializeApp(config);
 
-export const auth = getAuth();
-export const firestore = getFirestore();
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
-const provider = new GoogleAuthProvider();
+const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-// export default firebase;
+export default firebase;
