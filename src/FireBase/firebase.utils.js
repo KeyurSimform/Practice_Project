@@ -1,6 +1,6 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 // import {SignInWi}
 
@@ -12,6 +12,25 @@ const config = {
 	messagingSenderId: "853099005582",
 	appId: "1:853099005582:web:8f250613eac8f11899ebdf",
 	measurementId: "G-XDKSSYS6KB",
+};
+
+export const creatUserProfileDocument = async (userAuth, additionalData) => {
+	if (!userAuth) return;
+
+	const userRef = firestore.doc(`users/${userAuth.uid}`);
+	const snapShot = await userRef.get();
+
+	if (!snapShot.exists) {
+		const { displayName, email } = userAuth;
+		const createdAt = new Date();
+
+		try {
+			await userRef.set({ displayName, email, createdAt, ...additionalData });
+		} catch (error) {
+			console.log("error while creating user", error.message);
+		}
+	}
+	return userRef;
 };
 
 firebase.initializeApp(config);

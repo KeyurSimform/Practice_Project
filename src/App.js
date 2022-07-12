@@ -7,6 +7,7 @@ import SignInAndSignUp from "./Pages/SignInAndSignOut/SignInAndSignUp"
 import HatsPage from "./Pages/HatsPage/HatsPage";
 import { auth } from "./FireBase/firebase.utils";
 import { useEffect,useState } from "react";
+import { creatUserProfileDocument } from "./FireBase/firebase.utils";
 
 function App() {	
 
@@ -17,14 +18,14 @@ function App() {
 	);
 
 	useEffect(() => {
-		auth.onAuthStateChanged(users=>{
-		setUsers({currentUser : users});
-		console.log(users);
+		auth.onAuthStateChanged(async users=>{
+		creatUserProfileDocument(users);
+		// console.log(users);
 	  })
 	}, [])
 	return (
 		<div>
-		<Header/>
+		<Header currentUser ={users.currentUser}/>
 			<Routes>
 				<Route path="/" element={<HomePage/>}/>
 				<Route path="/shop" element={<Shop/>}/>

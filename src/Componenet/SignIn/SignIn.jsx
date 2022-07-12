@@ -7,18 +7,17 @@ import { signInWithGoogle } from "../../FireBase/firebase.utils";
 const SignIn = () => {
 	const [attribute, setAttribute] = useState({
 		email: "",
-		password: ""
+		password: "",
 	});
 	// console.log(attribute);
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setAttribute(() => {
-			return {email: "", password:"" };
+			return { email: "", password: "" };
 		});
 		// setAttribute((prev)=>return{{...prev,email:"", password:""}});
 		console.log("Submit");
 		console.log(attribute);
-
 	};
 
 	const handleChange = (event) => {
@@ -29,7 +28,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className="sigin-in">
+		<div className="sign-in">
 			<h2>I already have and account</h2>
 			<span>Sign In with your email and password</span>
 			<form onSubmit={handleSubmit}>
@@ -50,10 +49,13 @@ const SignIn = () => {
 					label="password"
 					required
 				/>
-				<CustomButton type="submit">Sign In</CustomButton>
-				<br></br>
-				<CustomButton onClick={signInWithGoogle}>Sign In with Google</CustomButton>
-
+				<div className="buttons">
+					<CustomButton type="submit">Sign In</CustomButton>
+					<br></br>
+					<CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+						Sign In with Google
+					</CustomButton>
+				</div>
 			</form>
 		</div>
 	);
