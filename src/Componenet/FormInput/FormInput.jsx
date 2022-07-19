@@ -1,7 +1,7 @@
 import "../FormInput/FormInput.style.scss";
 
 const FormInput = ({value , ...otherProps}) => {
-	console.log(value);
+	// console.log(value);
 	return (
 		<div className="group">
 			<input className="form-input" value={value} onChange={otherProps.handleChange} {...otherProps}/>

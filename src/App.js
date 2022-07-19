@@ -26,13 +26,17 @@ function App() {
 							id: snapShot.id,
 							...snapShot.data(),
 						},
-					}, ()=>{console.log(users.currentUser)});
+					});
 				});
 			}
 			setUsers({currentUser:userAuth})
 			// console.log(users);
 		});
 	}, []);
+
+	useEffect(()=>{console.log(users.currentUser)},[users]);
+
+
 	return (
 		<div>
 			<Header currentUser={users.currentUser} />
