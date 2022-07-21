@@ -2,7 +2,7 @@ import "../SignIn/SignIn.style.scss";
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 import { useState } from "react";
-import { signInWithGoogle } from "../../FireBase/firebase.utils";
+import { auth, signInWithGoogle } from "../../FireBase/firebase.utils";
 
 const SignIn = () => {
 	const [attribute, setAttribute] = useState({
@@ -10,8 +10,17 @@ const SignIn = () => {
 		password: "",
 	});
 	// console.log(attribute);
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		const { email, password } = attribute;
+		try {
+			await auth.signInWithEmailAndPassword(email, password);
+			setAttribute({ email: "", password: "" });
+		} catch (error) {
+			console.log(error);
+		}
+
 		setAttribute(() => {
 			return { email: "", password: "" };
 		});
